@@ -4,345 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kimaya Recruitment 2026</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            /* LIGHT THEME */
-            --bg-gradient-1: #e0c3fc;
-            --bg-gradient-2: #8ec5fc;
-            --bg-gradient-3: #e2ebf0;
-            --bg-gradient-4: #cfd9df;
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.9);
-            --text-primary: #2d3748;
-            --text-secondary: rgba(45, 55, 72, 0.7);
-            --input-bg: rgba(255, 255, 255, 0.8);
-            --input-border: rgba(255, 255, 255, 1);
-            --shadow-color: rgba(0, 0, 0, 0.05);
-            --accent-glow: rgba(142, 197, 252, 0.6);
-            --error-color: #f87171;
-            --success-color: #34d399;
+            --bg-gradient-1: #e0c3fc; --bg-gradient-2: #8ec5fc; --bg-gradient-3: #e2ebf0; --bg-gradient-4: #cfd9df;
+            --glass-bg: rgba(255, 255, 255, 0.75); --glass-border: rgba(255, 255, 255, 0.9);
+            --text-primary: #2d3748; --text-secondary: rgba(45, 55, 72, 0.7);
+            --input-bg: rgba(255, 255, 255, 0.8); --input-border: rgba(255, 255, 255, 1);
+            --shadow-color: rgba(0, 0, 0, 0.05); --accent-glow: rgba(142, 197, 252, 0.6);
+            --error-color: #f87171; --success-color: #34d399;
         }
-
         [data-theme="dark"] {
-            /* DARK THEME */
-            --bg-gradient-1: #1a1a2e;
-            --bg-gradient-2: #16213e;
-            --bg-gradient-3: #0f3460;
-            --bg-gradient-4: #1a1a2e;
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: rgba(248, 250, 252, 0.7);
-            --input-bg: rgba(30, 41, 59, 0.5);
-            --input-border: rgba(255, 255, 255, 0.05);
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --accent-glow: rgba(59, 130, 246, 0.4);
+            --bg-gradient-1: #1a1a2e; --bg-gradient-2: #16213e; --bg-gradient-3: #0f3460; --bg-gradient-4: #1a1a2e;
+            --glass-bg: rgba(15, 23, 42, 0.6); --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc; --text-secondary: rgba(248, 250, 252, 0.7);
+            --input-bg: rgba(30, 41, 59, 0.5); --input-border: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(0, 0, 0, 0.3); --accent-glow: rgba(59, 130, 246, 0.4);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; overflow-x: hidden; min-height: 100vh; color: var(--text-primary); }
         .bg-animate {
             background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -1;
+            background-size: 400% 400%; animation: gradientMove 15s ease infinite;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
         }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .glass-container {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px -10px var(--shadow-color);
-        }
-
-        .custom-input {
-            background: var(--input-bg);
-            border: 2px solid var(--input-border);
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        }
-
-        .custom-input:focus {
-            border-color: #3b82f6;
-            background: var(--glass-bg);
-            outline: none;
-            transform: scale(1.005);
-        }
-
-        .custom-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.5;
-        }
-
-        .hidden-section {
-            display: none;
-        }
-
-        .btn-primary {
-            background-color: #2563eb;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px -5px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-primary:active:not(:disabled) {
-            transform: scale(0.96);
-        }
-
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Mobile specific refinements */
-        @media (max-width: 640px) {
-            .glass-container {
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-            }
-        }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .glass-container { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 20px 40px -10px var(--shadow-color); }
+        .custom-input { background: var(--input-bg); border: 2px solid var(--input-border); color: var(--text-primary); transition: all 0.2s ease; }
+        .custom-input:focus { border-color: #3b82f6; background: var(--glass-bg); outline: none; }
+        .btn-primary { background-color: #2563eb; color: white; transition: all 0.3s ease; }
+        .btn-primary:hover:not(:disabled) { background-color: #1d4ed8; transform: translateY(-2px); }
+        .spinner { width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="flex flex-col items-center">
     <div class="bg-animate"></div>
 
-    <!-- Theme Toggle -->
-    <button id="themeToggle" class="fixed top-4 right-4 md:top-6 md:right-6 p-3.5 rounded-full glass-container text-[var(--text-primary)] active:scale-90 md:hover:scale-110 transition-transform z-50 shadow-lg">
+    <button id="themeToggle" class="fixed top-4 right-4 p-3.5 rounded-full glass-container text-[var(--text-primary)] z-50 shadow-lg">
         <i data-lucide="moon" id="themeIcon" class="w-5 h-5"></i>
     </button>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex items-center justify-center w-full py-6 md:py-12 px-4">
-        <!-- Form Container -->
-        <div id="formCard" class="w-full max-w-2xl glass-container rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-12 transition-all duration-700">
-            <header class="mb-8 md:mb-10 text-center">
-                <div class="inline-block p-3 md:p-4 rounded-2xl md:rounded-3xl bg-[var(--accent-glow)] mb-4 md:mb-6 shadow-sm">
-                    <i data-lucide="shield-check" class="w-8 h-8 md:w-10 md:h-10 text-[var(--text-primary)]"></i>
+    <main class="flex-1 flex items-center justify-center w-full py-6 px-4">
+        <div id="formCard" class="w-full max-w-2xl glass-container rounded-[2rem] p-6 md:p-12 transition-all duration-700">
+            <header class="mb-8 text-center">
+                <div class="inline-block p-4 rounded-3xl bg-[var(--accent-glow)] mb-4 shadow-sm">
+                    <i data-lucide="shield-check" class="w-10 h-10 text-[var(--text-primary)]"></i>
                 </div>
-                <h1 class="text-3xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight mb-2">
-                    KIMAYA <span class="text-blue-600">2026</span>
-                </h1>
-                <p class="text-[var(--text-secondary)] font-medium text-base md:text-lg">Official Recruitment Portal</p>
+                <h1 class="text-3xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight mb-2">KIMAYA <span class="text-blue-600">2026</span></h1>
+                <p class="text-[var(--text-secondary)] font-medium">Official Recruitment Portal</p>
             </header>
 
             <form id="recruitmentForm" class="space-y-6">
-                <div id="errorMessage" class="hidden p-4 rounded-xl bg-red-100/90 border border-red-200 text-red-700 text-sm flex items-center gap-3">
-                    <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
+                <div id="errorMessage" class="hidden p-4 rounded-xl bg-red-100 border border-red-200 text-red-700 text-sm flex items-start gap-3">
+                    <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
                     <span id="errorText"></span>
                 </div>
 
-                <!-- Full Name -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="user" class="w-4 h-4"></i> Full Name
-                    </label>
-                    <input type="text" name="fullName" required placeholder="Enter your full name" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl text-base">
+                <div class="space-y-5">
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="user" class="w-4 h-4"></i> Full Name</label>
+                    <input type="text" name="fullName" required placeholder="Full Name" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="mail" class="w-4 h-4"></i> University Email</label>
+                    <input type="email" name="uniEmail" required placeholder="roll@kiit.ac.in" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="mail" class="w-4 h-4"></i> Personal Email</label>
+                    <input type="email" name="personalEmail" required placeholder="name@gmail.com" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="id-card" class="w-4 h-4"></i> Roll Number</label>
+                    <input type="text" name="rollNo" required placeholder="Roll Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="phone" class="w-4 h-4"></i> Contact</label>
+                    <input type="tel" name="contact" required placeholder="Mobile Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+
+                    <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="message-square" class="w-4 h-4"></i> Unavailability Reason</label>
+                    <textarea name="unavailabilityReason" rows="3" required placeholder="Reason for offline unavailability" class="custom-input w-full px-4 py-3 rounded-xl resize-none"></textarea></div>
                 </div>
 
-                <!-- University Email -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="mail" class="w-4 h-4"></i> University Email
-                    </label>
-                    <input type="email" name="uniEmail" required placeholder="roll@kiit.ac.in" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl text-base">
-                </div>
-
-                <!-- Personal Email ID -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="mail" class="w-4 h-4"></i> Personal Email ID
-                    </label>
-                    <input type="email" name="personalEmail" required placeholder="e.g. name@gmail.com" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl text-base">
-                </div>
-
-                <!-- Roll Number -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="id-card" class="w-4 h-4"></i> Roll Number
-                    </label>
-                    <input type="text" name="rollNo" required placeholder="e.g. 2205123" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl text-base">
-                </div>
-
-                <!-- Contact Number -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="phone" class="w-4 h-4"></i> Contact Number
-                    </label>
-                    <input type="tel" name="contact" required placeholder="10-digit mobile" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl text-base">
-                </div>
-
-                <!-- Reason -->
-                <div class="space-y-1.5 md:space-y-2">
-                    <label class="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--text-primary)] ml-1">
-                        <i data-lucide="message-square" class="w-4 h-4"></i> Offline Interview Unavailability
-                    </label>
-                    <textarea name="unavailabilityReason" rows="3" required placeholder="Provide a valid reason if you cannot attend in-person" class="custom-input w-full px-4 py-3 md:py-3.5 rounded-xl resize-none text-base"></textarea>
-                </div>
-
-                <button type="submit" id="submitBtn" class="btn-primary w-full py-4 mt-4 rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl flex items-center justify-center gap-3 disabled:opacity-50">
+                <button type="submit" id="submitBtn" class="btn-primary w-full py-4 mt-4 rounded-xl font-black text-lg shadow-xl flex items-center justify-center gap-3 disabled:opacity-50">
                     <i data-lucide="send" class="w-5 h-5" id="btnIcon"></i>
                     <span id="btnText">SUBMIT APPLICATION</span>
                 </button>
             </form>
         </div>
 
-        <!-- Success Message -->
-        <div id="successCard" class="hidden-section w-full max-w-lg glass-container rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 text-center transition-all duration-700">
-            <div class="w-16 h-16 md:w-24 md:h-24 bg-[var(--success-color)] rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-2xl shadow-green-500/20">
-                <i data-lucide="check-circle" class="w-8 h-8 md:w-12 md:h-12 text-white"></i>
+        <div id="successCard" class="hidden w-full max-w-lg glass-container rounded-[2.5rem] p-12 text-center transition-all duration-700">
+            <div class="w-24 h-24 bg-[var(--success-color)] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-green-500/20">
+                <i data-lucide="check-circle" class="w-12 h-12 text-white"></i>
             </div>
-            <h2 class="text-2xl md:text-3xl font-black text-[var(--text-primary)] mb-4">Application Received!</h2>
-            <p class="text-[var(--text-secondary)] mb-6 md:mb-8 text-sm md:text-base leading-relaxed">
-                Thank you! Your application for <strong>Kimaya 2026</strong> has been recorded in our official spreadsheet and database.
-            </p>
-            <button onclick="window.location.reload()" class="w-full md:w-auto px-8 py-3 bg-[var(--text-primary)] text-[var(--glass-bg)] font-bold rounded-xl hover:opacity-90 transition-opacity">
-                Done
-            </button>
+            <h2 class="text-3xl font-black text-[var(--text-primary)] mb-4">Success!</h2>
+            <p class="text-[var(--text-secondary)] mb-8">Application recorded successfully.</p>
+            <button onclick="window.location.reload()" class="w-full px-8 py-3 bg-[var(--text-primary)] text-white font-bold rounded-xl">Close</button>
         </div>
     </main>
 
-    <footer class="w-full text-center py-8 text-[var(--text-secondary)] text-[10px] md:text-xs font-medium opacity-60 mt-auto">
-        © 2026 Kimaya Society • KIIT University • Made with ❤️
-    </footer>
+    <footer class="w-full text-center py-8 text-[var(--text-secondary)] text-[10px] font-medium opacity-60 mt-auto">© 2026 Kimaya Society</footer>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-        // Global Variables
-        // Updated with your provided Web App URL
+        // Connection to your provided Web App URL
         const sheetAppUrl = "https://script.google.com/macros/s/AKfycbw17tlYo-jIySKhRG4ipDH2w65mGIqm4tNLEtAzvIDoq6E2wwtlBetDkO7DFfzfZYLRCA/exec";
         const appId = typeof __app_id !== 'undefined' ? __app_id : "kimaya-recruitment-2026";
         
         let currentUser = null;
         let db, auth;
 
-        // Initialize Firebase
-        try {
-            const firebaseConfig = JSON.parse(__firebase_config);
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-
-            signInAnonymously(auth).catch(err => console.error("Firebase Auth Error:", err));
-            onAuthStateChanged(auth, (user) => {
-                currentUser = user;
-            });
-        } catch (e) {
-            console.error("Firebase Init Error:", e);
+        async function init() {
+            try {
+                const config = JSON.parse(__firebase_config);
+                const app = initializeApp(config);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                onAuthStateChanged(auth, user => { 
+                    currentUser = user; 
+                });
+                await signInAnonymously(auth);
+            } catch (e) {
+                console.error("Firebase Init Error", e);
+            }
         }
-
-        // Initialize Lucide Icons
+        init();
         lucide.createIcons();
 
-        // Theme Logic
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        
         themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            themeIcon.setAttribute('data-lucide', newTheme === 'light' ? 'moon' : 'sun');
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            document.getElementById('themeIcon').setAttribute('data-lucide', next === 'light' ? 'moon' : 'sun');
             lucide.createIcons();
         });
 
-        // Form Submission Logic
         const form = document.getElementById('recruitmentForm');
         const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnIcon = document.getElementById('btnIcon');
         const errorDiv = document.getElementById('errorMessage');
         const errorText = document.getElementById('errorText');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             errorDiv.classList.add('hidden');
-            
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            const data = Object.fromEntries(new FormData(form).entries());
 
-            // Validations
+            // Validate University Email
             if (!data.uniEmail.toLowerCase().endsWith('@kiit.ac.in')) {
-                showError("Please use a valid @kiit.ac.in university email.");
-                return;
+                return showError("Use your official @kiit.ac.in email.");
             }
 
-            if (!currentUser) {
-                showError("Initializing connection... Please try in a moment.");
-                return;
-            }
-
-            // Start Loading
             setLoading(true);
-
             try {
-                // 1. Save to Firebase
-                const applicationsRef = collection(db, 'artifacts', appId, 'public', 'data', 'applications');
-                await addDoc(applicationsRef, {
-                    ...data,
-                    userId: currentUser.uid,
-                    submittedAt: serverTimestamp()
-                });
+                // 1. Submit to Firestore (Primary Database)
+                if (db && currentUser) {
+                    const applicationsRef = collection(db, 'artifacts', appId, 'public', 'data', 'applications');
+                    await addDoc(applicationsRef, { 
+                        ...data, 
+                        userId: currentUser.uid, 
+                        submittedAt: serverTimestamp() 
+                    });
+                } else {
+                    throw new Error("Database not connected. Please refresh.");
+                }
 
-                // 2. Save to Google Sheets
+                // 2. Submit to Google Sheets (Backup/Spreadsheet)
                 if (sheetAppUrl) {
+                    // We use no-cors because Google Apps Script doesn't send CORS headers on JSON POSTs
+                    // even though it processes the data correctly.
                     await fetch(sheetAppUrl, {
                         method: 'POST',
                         mode: 'no-cors',
+                        cache: 'no-cache',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
                 }
 
-                // Show Success
-                document.getElementById('formCard').classList.add('hidden-section');
-                document.getElementById('successCard').classList.remove('hidden-section');
-                document.getElementById('successCard').classList.add('flex', 'flex-col');
-
+                // Success Transition
+                document.getElementById('formCard').classList.add('hidden');
+                document.getElementById('successCard').classList.remove('hidden');
             } catch (err) {
-                console.error(err);
-                showError("Submission failed. Check your connection.");
+                showError(err.message || "An unexpected error occurred. Please check your connection.");
             } finally {
                 setLoading(false);
             }
@@ -356,13 +199,8 @@
 
         function setLoading(isLoading) {
             submitBtn.disabled = isLoading;
-            if (isLoading) {
-                btnIcon.classList.add('hidden');
-                btnText.innerHTML = '<div class="spinner"></div>';
-            } else {
-                btnIcon.classList.remove('hidden');
-                btnText.textContent = "SUBMIT APPLICATION";
-            }
+            document.getElementById('btnText').innerHTML = isLoading ? '<div class="spinner"></div>' : 'SUBMIT APPLICATION';
+            document.getElementById('btnIcon').className = isLoading ? 'hidden' : 'w-5 h-5';
         }
     </script>
 </body>
