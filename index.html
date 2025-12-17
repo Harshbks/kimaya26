@@ -64,22 +64,22 @@
 
                 <div class="space-y-5">
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="user" class="w-4 h-4"></i> Full Name</label>
-                    <input type="text" name="fullName" required placeholder="Full Name" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+                    <input type="text" name="Fullname" required placeholder="Full Name" class="custom-input w-full px-4 py-3 rounded-xl"></div>
 
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="mail" class="w-4 h-4"></i> University Email</label>
-                    <input type="email" name="uniEmail" required placeholder="roll@kiit.ac.in" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+                    <input type="email" name="UniversilEmail" required placeholder="roll@kiit.ac.in" class="custom-input w-full px-4 py-3 rounded-xl"></div>
 
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="mail" class="w-4 h-4"></i> Personal Email</label>
-                    <input type="email" name="personalEmail" required placeholder="name@gmail.com" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+                    <input type="email" name="PersonalEmailId" required placeholder="name@gmail.com" class="custom-input w-full px-4 py-3 rounded-xl"></div>
 
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="id-card" class="w-4 h-4"></i> Roll Number</label>
-                    <input type="text" name="rollNo" required placeholder="Roll Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+                    <input type="text" name="Rollnumber" required placeholder="Roll Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
 
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="phone" class="w-4 h-4"></i> Contact</label>
-                    <input type="tel" name="contact" required placeholder="Mobile Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
+                    <input type="tel" name="Contactnumber" required placeholder="Mobile Number" class="custom-input w-full px-4 py-3 rounded-xl"></div>
 
                     <div class="space-y-1.5"><label class="flex items-center gap-2 text-xs font-bold"><i data-lucide="message-square" class="w-4 h-4"></i> Unavailability Reason</label>
-                    <textarea name="unavailabilityReason" rows="3" required placeholder="Reason for offline unavailability" class="custom-input w-full px-4 py-3 rounded-xl resize-none"></textarea></div>
+                    <textarea name="OfflineinterviewUnavailability" rows="3" required placeholder="Reason for offline unavailability" class="custom-input w-full px-4 py-3 rounded-xl resize-none"></textarea></div>
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-primary w-full py-4 mt-4 rounded-xl font-black text-lg shadow-xl flex items-center justify-center gap-3 disabled:opacity-50">
@@ -94,42 +94,18 @@
                 <i data-lucide="check-circle" class="w-12 h-12 text-white"></i>
             </div>
             <h2 class="text-3xl font-black text-[var(--text-primary)] mb-4">Success!</h2>
-            <p class="text-[var(--text-secondary)] mb-8">Application recorded successfully.</p>
+            <p class="text-[var(--text-secondary)] mb-8">Your data has been saved to the sheet.</p>
             <button onclick="window.location.reload()" class="w-full px-8 py-3 bg-[var(--text-primary)] text-white font-bold rounded-xl">Close</button>
         </div>
     </main>
 
     <footer class="w-full text-center py-8 text-[var(--text-secondary)] text-[10px] font-medium opacity-60 mt-auto">© 2026 Kimaya Society</footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-        // Connection to your provided Web App URL
-        const sheetAppUrl = "https://script.google.com/macros/s/AKfycbw17tlYo-jIySKhRG4ipDH2w65mGIqm4tNLEtAzvIDoq6E2wwtlBetDkO7DFfzfZYLRCA/exec";
-        const appId = typeof __app_id !== 'undefined' ? __app_id : "kimaya-recruitment-2026";
-        
-        let currentUser = null;
-        let db, auth;
-
-        async function init() {
-            try {
-                const config = JSON.parse(__firebase_config);
-                const app = initializeApp(config);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                onAuthStateChanged(auth, user => { 
-                    currentUser = user; 
-                });
-                await signInAnonymously(auth);
-            } catch (e) {
-                console.error("Firebase Init Error", e);
-            }
-        }
-        init();
+    <script>
+        // Initialize Icons
         lucide.createIcons();
 
+        // Theme Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme');
@@ -139,57 +115,54 @@
             lucide.createIcons();
         });
 
+        // Form Submission Logic
         const form = document.getElementById('recruitmentForm');
         const submitBtn = document.getElementById('submitBtn');
         const errorDiv = document.getElementById('errorMessage');
         const errorText = document.getElementById('errorText');
 
-        form.addEventListener('submit', async (e) => {
+        // Your provided Web App URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw9U1_3w5-fUpO-4WjjNI1rPdhWku_bbHnhvzJenuZpqfkRm7nPPaEDBt-XXuhRC-LWGg/exec';
+
+        form.addEventListener('submit', e => {
             e.preventDefault();
             errorDiv.classList.add('hidden');
-            const data = Object.fromEntries(new FormData(form).entries());
-
-            // Validate University Email
-            if (!data.uniEmail.toLowerCase().endsWith('@kiit.ac.in')) {
-                return showError("Use your official @kiit.ac.in email.");
+            
+            // Simple validation check for KIIT email
+            const uniEmailInput = form.querySelector('[name="UniversilEmail"]');
+            if (!uniEmailInput.value.toLowerCase().endsWith('@kiit.ac.in')) {
+                showError("Please use your official @kiit.ac.in email.");
+                return;
             }
 
             setLoading(true);
-            try {
-                // 1. Submit to Firestore (Primary Database)
-                if (db && currentUser) {
-                    const applicationsRef = collection(db, 'artifacts', appId, 'public', 'data', 'applications');
-                    await addDoc(applicationsRef, { 
-                        ...data, 
-                        userId: currentUser.uid, 
-                        submittedAt: serverTimestamp() 
-                    });
-                } else {
-                    throw new Error("Database not connected. Please refresh.");
-                }
 
-                // 2. Submit to Google Sheets (Backup/Spreadsheet)
-                if (sheetAppUrl) {
-                    // We use no-cors because Google Apps Script doesn't send CORS headers on JSON POSTs
-                    // even though it processes the data correctly.
-                    await fetch(sheetAppUrl, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        cache: 'no-cache',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                }
+            // Create FormData object (Standard way to send form data)
+            const formData = new FormData(form);
 
-                // Success Transition
-                document.getElementById('formCard').classList.add('hidden');
-                document.getElementById('successCard').classList.remove('hidden');
-            } catch (err) {
-                showError(err.message || "An unexpected error occurred. Please check your connection.");
-            } finally {
+            // Send to Google Sheets using fetch
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData 
+            })
+            .then(response => {
+                // Google Scripts often return opaque responses with no-cors, 
+                // but if the fetch completes, it's usually successful.
+                showSuccess();
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                showError("Unable to save data. Please check your internet connection.");
+            })
+            .finally(() => {
                 setLoading(false);
-            }
+            });
         });
+
+        function showSuccess() {
+            document.getElementById('formCard').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
+        }
 
         function showError(msg) {
             errorText.textContent = msg;
